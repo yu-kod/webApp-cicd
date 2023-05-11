@@ -24,7 +24,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4.4.0
         with:
-          images: tasyuminahito/webapp-cicd
+          images: ${{ secrets.DOCKER_USERNAME }}/webapp-cicd
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v4.0.0
