@@ -48,7 +48,7 @@ jobs:
         working-directory: webApp-Manifests
         continue-on-error: true
         run: |
-          yq e '.metadata.name = "webapp-deployment${{ github.run_number }}"' -i ./main/deployment.yaml
+          yq -i '.front.imageTag = "${{ steps.meta.outputs.tags }}"' ./main/deployment.yaml
           git diff --name-only --exit-code
 
       - name: Commit and push
