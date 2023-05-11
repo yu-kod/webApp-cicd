@@ -31,7 +31,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/webapp-cicd:${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       
       - name: Checkout config repository
@@ -47,7 +47,7 @@ jobs:
         working-directory: webApp-Manifests
         continue-on-error: true
         run: |
-          yq e '.spec.template.spec.containers.image = "${{ secrets.DOCKER_USERNAME }}/webapp-cicd:v${{ github.run_number }}"' -i ./main/values.yaml
+          yq e '.spec.template.spec.containers[1] = "${{ secrets.DOCKER_USERNAME }}/webapp-cicd:v${{ github.run_number }}"' -i ./main/values.yaml
           git diff --name-only --exit-code
 
       - name: Commit and push
