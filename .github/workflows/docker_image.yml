@@ -47,7 +47,7 @@ jobs:
         working-directory: webApp-Manifests
         continue-on-error: true
         run: |
-          yq e '.spec.template.spec.containers.image = "${{ secrets.DOCKER_USERNAME }}/webapp-cicd:${{ github.run_number }}"' -i ./main/values.yaml
+          yq e '.spec.template.spec.containers.image = "${{ secrets.DOCKER_USERNAME }}/webapp-cicd:v${{ github.run_number }}"' -i ./main/values.yaml
           git diff --name-only --exit-code
 
       - name: Commit and push
@@ -57,7 +57,7 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
-          git commit --author=. -m "Update image tag to "`printenv ${{ github.run_number }}`
+          git commit --author=. -m "Update image tag to "`printenv v${{ github.run_number }}`
           git push
         
             
