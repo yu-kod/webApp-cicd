@@ -2,7 +2,8 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches-ignore:
+      - '**'
     tags:
       - 'v*'
 
@@ -50,6 +51,7 @@ jobs:
         uses: docker/metadata-action@v4.4.0
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/webapp-cicd
+          flavor: latest=false
           tags:  type=semver,pattern={{version}}
       
       - name: Build and push Docker image
@@ -73,7 +75,7 @@ jobs:
         working-directory: webApp-Manifests
         continue-on-error: true
         run: |
-          yq -i '.spec.template.spec.containers[0].image = "${{ secrets.DOCKER_USERNAME }}/webapp-cicd:${{ steps.meta.outputs.tags }}"' ./main/deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = "${{ steps.meta.outputs.tags }}"' ./main/deployment.yaml
           git diff --name-only --exit-code
 
       - name: Commit and push
