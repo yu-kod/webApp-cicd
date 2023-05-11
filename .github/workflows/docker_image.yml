@@ -2,7 +2,7 @@ name: Build and Push Docker
 
 on:
   workflow_run:
-    workflows: [Django CI]
+    workflows: []
     types: [completed]
 jobs:
   build:
