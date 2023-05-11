@@ -31,7 +31,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.run_number }}
+          tags: v${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
       
       - name: Checkout config repository
