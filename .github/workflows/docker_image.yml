@@ -25,7 +25,6 @@ jobs:
         uses: docker/metadata-action@v4.4.0
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/webapp-cicd
-          tags: type=semver,pattern={{version}}
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v4.0.0
