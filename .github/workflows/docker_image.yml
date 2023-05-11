@@ -47,7 +47,7 @@ jobs:
         working-directory: webApp-Manifests
         continue-on-error: true
         run: |
-          yq -i '.front.imageTag = "'`printenv ${{ steps.meta.outputs.tags }}`'"' ./main/values.yaml
+          yq e '.metadata.name = "webapp-deployment${{ github.run_number }}"' -i ./main/values.yaml
           git diff --name-only --exit-code
 
       - name: Commit and push
@@ -57,7 +57,7 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
-          git commit --author=. -m "Update image tag to "`printenv ${{ steps.meta.outputs.tags }}`
+          git commit --author=. -m "Update image tag to "`printenv ${{ github.run_number }}`
           git push
         
             
