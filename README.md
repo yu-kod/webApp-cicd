@@ -12,7 +12,7 @@
 
 GitHub ActionsとArgoCDを使用する予定です。
 
-Djangoの[チューとリアル](https://docs.djangoproject.com/ja/4.2/intro/)を作る形で進めます。
+Djangoの[チュートリアル](https://docs.djangoproject.com/ja/4.2/intro/)を作る形で進めます。
 
 
 CICDパイプラインは以下の画像です。
